@@ -1,9 +1,9 @@
 package Benchmarks;
 use strict;
 use warnings;
-use Benchmark qw/:all/;
+use Benchmark qw//;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub import {
     my ($class, $code, $count) = @_;
@@ -11,7 +11,7 @@ sub import {
     Benchmark->export_to_level(1, $class, ':all');
 
     if ($code && ref $code eq 'CODE') {
-        cmpthese( timethese( $count || -1, $code->() ) );
+        Benchmark::cmpthese( Benchmark::timethese( $count || -1, $code->() ) );
     }
 }
 
@@ -27,7 +27,7 @@ Benchmarks - The comparison benchmarker
 =head1 SYNOPSIS
 
     use Benchmarks sub {
-        my $x = 1;
+        my $x = 2;
         +{
             times => sub { $x * $x * $x * $x },
             raise => sub { $x ** 4 },
@@ -63,13 +63,13 @@ NOTE that C<Benchmarks> exports *ALL* functions from C<Benchmark>. You can use C
 
     timethis (-1, sub { bless +{}, 'Foo' } );
 
-More information about functions: <https://metacpan.org/pod/Benchmark#Standard-Exports> and <https://metacpan.org/pod/Benchmark#Optional-Exports
->
+More information about functions: L<https://metacpan.org/pod/Benchmark#Standard-Exports> and L<https://metacpan.org/pod/Benchmark#Optional-Exports>
+
 
 =head1 REPOSITORY
 
 Benchmarks is hosted on github
-<http://github.com/bayashi/Benchmarks>
+L<http://github.com/bayashi/Benchmarks>
 
 Welcome your patches and issues :D
 
