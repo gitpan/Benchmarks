@@ -1,5 +1,8 @@
 Revision history for Perl extension Benchmarks
 
+0.04    Sat May  3 18:23:31 JST 2014
+        - fixed test for Travis-CI
+
 0.03    Sat May  3 17:57:10 JST 2014
         - added new feature: to get a pure benchmark(NOT to compare)
         - refactor
