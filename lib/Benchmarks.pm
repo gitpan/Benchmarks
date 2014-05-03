@@ -3,15 +3,36 @@ use strict;
 use warnings;
 use Benchmark qw//;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub import {
-    my ($class, $code, $count) = @_;
+    my ($class, $code, $count, $style, $title) = @_;
 
     Benchmark->export_to_level(1, $class, ':all');
 
-    if ($code && ref $code eq 'CODE') {
-        Benchmark::cmpthese( Benchmark::timethese( $count || -1, $code->() ) );
+    return unless $code;
+    return unless ref $code eq 'CODE';
+
+    my $ret   = $code->();
+    $count = !defined($count) ? -1 : $count;
+    $style ||= 'auto';
+
+    _run_benchmark($count, $ret, $style, $title);
+}
+
+sub _run_benchmark {
+    my ($count, $ret, $style, $title) = @_;
+
+    my $ref_ret = ref $ret;
+
+    if ( !$ref_ret || $ref_ret eq 'CODE' ) {
+        Benchmark::timethis($count, $ret, $title || undef, $style);
+    }
+    elsif ( $ref_ret eq 'HASH' ) {
+        Benchmark::cmpthese($count, $ret, $style);
+    }
+    else {
+        die "The CODE returned wrong retval.";
     }
 }
 
@@ -57,11 +78,28 @@ Then the comparison will be invoked and show the result like below.
     times 4051316/s    --  -54%
     raise 8895180/s  120%    --
 
-NOTE that C<Benchmarks> exports *ALL* functions from C<Benchmark>. You can use C<Benchmarks> module as same as Benchmark module.
+=head2 PURE BENCHMARK
+
+B<Benchmarks> can show a pure benchmark(NOT to compare) like below.
+
+    use Benchmarks sub {
+        my $x = 2;
+        sub { $x * $x * $x * $x }; # only one code
+    };
+
+then the result like this.
+
+    timethis for 1:  1 wallclock secs ( 1.07 usr +  0.00 sys =  1.07 CPU) @ 4164904.67/s (n=4456448)
+
+=head2 MORE FUNCTIONS
+
+C<Benchmarks> exports *ALL* functions from C<Benchmark>. You can use C<Benchmarks> module as same as Benchmark module.
 
     use Benchmarks;
 
-    timethis (-1, sub { bless +{}, 'Foo' } );
+    warn timestr(
+        countit(1, sub { bless +{}, 'Foo' } )
+    );
 
 More information about functions: L<https://metacpan.org/pod/Benchmark#Standard-Exports> and L<https://metacpan.org/pod/Benchmark#Optional-Exports>
 

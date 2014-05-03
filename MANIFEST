@@ -8,6 +8,10 @@ README.pod
 t/00_compile.t
 t/01_basic.t
 t/02_benchmark.t
+t/03_style_option.t
+t/04_timethis.t
+t/05_timethis_none.t
+t/06_timethis_title.t
 xt/01_perlcritic.t
 xt/02_pod-coverage.t
 xt/03_pod.t

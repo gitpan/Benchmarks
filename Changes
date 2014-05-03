@@ -1,5 +1,9 @@
 Revision history for Perl extension Benchmarks
 
+0.03    Sat May  3 17:57:10 JST 2014
+        - added new feature: to get a pure benchmark(NOT to compare)
+        - refactor
+
 0.02    Tue Apr 29 16:42:05 JST 2014
         - misc fixes
 
