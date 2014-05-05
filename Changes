@@ -1,5 +1,8 @@
 Revision history for Perl extension Benchmarks
 
+0.05    Mon May  5 18:16:41 JST 2014
+        - fixed dependency
+
 0.04    Sat May  3 18:23:31 JST 2014
         - fixed test for Travis-CI
 

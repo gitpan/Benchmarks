@@ -16,12 +16,12 @@ name: Benchmarks
 provides:
   Benchmarks:
     file: lib/Benchmarks.pm
-    version: 0.04
+    version: 0.05
 requires:
-  Benchmark: 0
+  Benchmark: 1.07
   perl: 5.008001
 resources:
   bugtracker: http://github.com/bayashi/Benchmarks/issues
   license: http://dev.perl.org/licenses/
   repository: http://github.com/bayashi/Benchmarks
-version: 0.04
+version: 0.05

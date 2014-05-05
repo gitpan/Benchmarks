@@ -16,7 +16,7 @@ my $builder = Module::Build->new(
     },
     requires => {
         'perl' => '5.008001',
-        'Benchmark' => 0,
+        'Benchmark' => 1.07,
     },
     add_to_cleanup      => [ 'Benchmarks-*' ],
     meta_merge     => {
