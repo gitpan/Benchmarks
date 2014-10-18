@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Benchmark qw//;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 sub import {
     my ($class, $code, $count, $style, $title) = @_;
@@ -102,6 +102,40 @@ C<Benchmarks> exports *ALL* functions from C<Benchmark>. You can use C<Benchmark
     );
 
 More information about functions: L<https://metacpan.org/pod/Benchmark#Standard-Exports> and L<https://metacpan.org/pod/Benchmark#Optional-Exports>
+
+=head2 BENCHMARKS ARGS
+
+When you use C<Benchmarks>, you can throw few args like below.
+
+    use Benchmarks sub {
+        # benchmark hash or code.
+    }, COUNT, STYLE, TITLE;
+
+example STYLE:
+
+    use Benchmarks sub {
+        my $x = 2;
+        +{
+            times => sub { $x * $x },
+            raise => sub { $x ** 2 },
+        };
+    }, 100, "none";
+
+example STYLE and TITLE:
+
+    use Benchmarks sub {
+        my $x = 2;
+        sub { $x * $x };
+    }, 100, 'all', '2 times';
+
+
+=head2 BENCHMARK TEMPLATE
+
+This module includes the `penchmark` command. It's generator of the C<Benchmarks> template.
+
+    $ penchmarks FILE_PATH
+
+Then you can edit the C<FILE_PATH> file.
 
 
 =head1 REPOSITORY

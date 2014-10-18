@@ -18,6 +18,7 @@ my $builder = Module::Build->new(
         'perl' => '5.008001',
         'Benchmark' => 1.07,
     },
+    script_files        => [ 'script/penchmarks' ],
     add_to_cleanup      => [ 'Benchmarks-*' ],
     meta_merge     => {
       resources => {
