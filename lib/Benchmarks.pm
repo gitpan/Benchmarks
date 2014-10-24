@@ -1,14 +1,12 @@
 package Benchmarks;
 use strict;
 use warnings;
-
-our $VERSION = '0.07';
+use Benchmark qw/ :hireswallclock /;
+our $VERSION = '0.08';
 
 sub import {
     my ($class, $code, $count, $style, $title) = @_;
 
-    require Benchmark;
-    Benchmark->import;
     Benchmark->export_to_level(1, $class, ':all');
 
     return unless $code;
